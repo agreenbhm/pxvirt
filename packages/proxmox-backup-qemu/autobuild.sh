@@ -9,7 +9,7 @@ echo "This is $PKGNAME build scripts"
 cd $SCRIPT_DIR/$PKGNAME/submodules/proxmox-backup/
 apt update
 yes |mk-build-deps --install --remove
-apt install librust-pbs-api-types-dev=1.0.1-1 -y
+apt install librust-pbs-api-types-dev -y
 cd $SCRIPT_DIR/$PKGNAME
 exec_build_make
 

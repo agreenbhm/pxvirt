@@ -24,10 +24,10 @@
 	url = https://git.proxmox.com/git/proxmox-archive-keyring.git
 [submodule "packages/proxmox-ve/proxmox-ve"]
 	path = packages/proxmox-ve/proxmox-ve
-	url = https://github.com/jiangcuo/proxmox-ve.git
+	url = https://git.proxmox.com/git/proxmox-ve.git
 [submodule "packages/pve-storage/pve-storage"]
 	path = packages/pve-storage/pve-storage
-	url = https://github.com/jiangcuo/pve-storage.git
+	url = https://git.proxmox.com/git/pve-storage.git
 [submodule "packages/proxmox-mini-journalreader/proxmox-mini-journalreader"]
 	path = packages/proxmox-mini-journalreader/proxmox-mini-journalreader
 	url = https://git.proxmox.com/git/proxmox-mini-journalreader.git
@@ -188,12 +188,15 @@
 [submodule "packages/ceph-17/ceph-17"]
 	path = packages/ceph-17/ceph-17
 	url = https://git.proxmox.com/git/ceph.git
+	branch = pacific-stable-7
 [submodule "packages/ceph-18/ceph-18"]
 	path = packages/ceph-18/ceph-18
 	url = https://git.proxmox.com/git/ceph.git
+	branch = reef-stable-8
 [submodule "packages/ceph-19/ceph-19"]
 	path = packages/ceph-19/ceph-19
 	url = https://git.proxmox.com/git/ceph.git
+	branch = squid-stable-9
 [submodule "packages/novnc-pve/novnc-pve"]
 	path = packages/novnc-pve/novnc-pve
 	url = https://git.proxmox.com/git/novnc-pve.git

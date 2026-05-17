@@ -8,7 +8,7 @@ echo "This is $PKGNAME build scripts"
 
 cd $SCRIPT_DIR/$PKGNAME
 apt update
-apt install librust-itertools-dev=0.10.3-1 -y
+apt install librust-itertools-dev -y
 yes |mk-build-deps --install --remove
 exec_build_make
 cd $SCRIPT_DIR/$PKGNAME/build

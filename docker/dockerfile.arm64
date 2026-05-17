@@ -1,16 +1,14 @@
-FROM debian:12
-ARG DEBIAN_APT=http://mirrors.ustc.edu.cn
-ARG PVE_APT=https://mirrors.lierfang.com
-ARG ARCH=
+FROM debian:13
+ARG DEBIAN_APT=http://deb.debian.org
 
 
 
 
-RUN rm /etc/apt/sources.list.d/*  \
-&& echo "deb $DEBIAN_APT/debian bookworm main contrib non-free non-free-firmware" >/etc/apt/sources.list \
-&& echo "deb $DEBIAN_APT/debian  bookworm-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list \
-&& echo "deb $DEBIAN_APT/debian  bookworm-backports main contrib non-free non-free-firmware" >> /etc/apt/sources.list \
-&& echo "deb $DEBIAN_APT/debian-security  bookworm-security main contrib non-free non-free-firmware " >> /etc/apt/sources.list 
+RUN rm -f /etc/apt/sources.list.d/* \
+&& echo "deb $DEBIAN_APT/debian trixie main contrib non-free non-free-firmware" >/etc/apt/sources.list \
+&& echo "deb $DEBIAN_APT/debian  trixie-updates main contrib non-free non-free-firmware" >> /etc/apt/sources.list \
+&& echo "deb $DEBIAN_APT/debian  trixie-backports main contrib non-free non-free-firmware" >> /etc/apt/sources.list \
+&& echo "deb https://security.debian.org/debian-security  trixie-security main contrib non-free non-free-firmware " >> /etc/apt/sources.list
 
 
 RUN apt update && apt install -y wget nano curl gnupg  ca-certificates apt-utils
@@ -19,23 +17,25 @@ RUN apt update && apt install -y wget nano curl gnupg  ca-certificates apt-utils
 
 RUN ARCH=$(dpkg --print-architecture) \
 && if [ "$ARCH" = "amd64" ]; then \
-    echo "deb $PVE_APT/proxmox/debian/pve bookworm pve-no-subscription" >> /etc/apt/sources.list;  \
-    echo "deb $PVE_APT/proxmox/debian/devel bookworm main" >> /etc/apt/sources.list; \
-    curl -l -o /etc/apt/trusted.gpg.d/proxmox-release-bookworm.gpg $PVE_APT/proxmox/debian/proxmox-release-bookworm.gpg; \
+    echo "deb http://download.proxmox.com/debian/pve trixie pve-no-subscription" >> /etc/apt/sources.list;  \
+    echo "deb http://download.proxmox.com/debian/devel trixie main" >> /etc/apt/sources.list; \
+    wget -qO /etc/apt/trusted.gpg.d/proxmox-release-trixie.gpg \
+        https://enterprise.proxmox.com/debian/proxmox-archive-keyring-trixie.gpg; \
 else  \
-    echo "deb $PVE_APT/proxmox/debian/pve bookworm port" >> /etc/apt/sources.list;  \
-    echo "deb $PVE_APT/proxmox/debian/devel bookworm port" >> /etc/apt/sources.list; \
-    curl -l -o /etc/apt/trusted.gpg.d/pveport.gpg $PVE_APT/proxmox/debian/pveport.gpg; \
+    echo "deb https://us.mirrors.lierfang.com/pxcloud/pxvirt trixie main" >> /etc/apt/sources.list;  \
+    echo "deb https://us.mirrors.lierfang.com/pxcloud/devel trixie main" >> /etc/apt/sources.list; \
+    curl -l -o /etc/apt/trusted.gpg.d/pveport.gpg \
+        https://us.mirrors.lierfang.com/pxcloud/pxvirt/pveport.gpg; \
 fi
 
 RUN apt update && apt -y install build-* devscripts cargo dh-cargo devscripts rsync debcargo pkg-config debhelper git bison dwarves flex meson equivs
 
 RUN apt update  \
-&& DEBIAN_FRONTEND=noninteractiv apt-get -y --no-install-recommends  install  proxmox-ve || echo ok 
+&& DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends  install  proxmox-ve || echo ok
 
 RUN rm /var/lib/dpkg/info/pve-manager.postinst \
 && rm /var/lib/dpkg/info/proxmox-ve.postinst \
-&& dpkg --configure -a 
+&& dpkg --configure -a
 
 
 ADD ./start.sh /
