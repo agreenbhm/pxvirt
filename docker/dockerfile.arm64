@@ -34,10 +34,7 @@ RUN apt update  \
 && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends  install  proxmox-ve || echo ok
 
 RUN rm /var/lib/dpkg/info/pve-manager.postinst \
-&& rm /var/lib/dpkg/info/proxmox-ve.postinst \
-&& dpkg --configure -a
-
-
+ && dpkg --force-confdef --force-confold --configure -a
 ADD ./start.sh /
 
 CMD ["bash","/start.sh"]
