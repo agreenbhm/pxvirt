@@ -28,7 +28,7 @@ else  \
         https://us.mirrors.lierfang.com/pxcloud/pxvirt/pveport.gpg; \
 fi
 
-RUN apt update && apt -y install build-* devscripts cargo dh-cargo devscripts rsync debcargo pkg-config debhelper git bison dwarves flex meson equivs
+RUN apt update && apt -y install build-* devscripts cargo dh-cargo devscripts rsync debcargo pkg-config debhelper git bison dwarves flex meson equivs liblocale-po-perl xtr
 
 RUN apt update  \
 && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends  install  proxmox-ve || echo ok
