@@ -1,21 +1,8 @@
---- a/debian/rules
-+++ b/debian/rules
-@@ -12,7 +12,7 @@ COMMON_CMAKE_FLAGS = \
- 	-DCERT_LOCATION=/etc/ssl/certs/ca-certificates.crt \
- 	-DDISABLE_ONLINE_TESTS=ON \
- 	-DENABLE_REPRODUCIBLE_BUILDS=ON \
- 	-DREGEX_BACKEND=pcre2 \
- 	-DUSE_GSSAPI=ON \
--	-DUSE_HTTPS=mbedTLS \
-+	-DUSE_HTTPS=OpenSSL \
- 	-DUSE_HTTP_PARSER=system \
- 	-DUSE_NTLMCLIENT=OFF \
- 	-DUSE_SSH=ON
+diff --git a/debian/control b/debian/control
+index 9156c3be6..629ca2585 100644
 --- a/debian/control
 +++ b/debian/control
-@@ -8,7 +8,7 @@ Build-Depends: debhelper-compat (= 13),
-                python3-minimal:any,
-                pkg-config,
+@@ -10,7 +10,7 @@ Build-Depends: debhelper-compat (= 13),
                 ca-certificates,
                 cmake,
                 zlib1g-dev,
@@ -24,10 +11,7 @@
                 libssh2-1-dev,
                 libhttp-parser-dev,
                 libpcre2-dev,
-@@ -18,7 +18,7 @@ Rules-Requires-Root: no
- Package: libgit2-dev
- Architecture: any
- Section: libdevel
+@@ -28,7 +28,7 @@ Section: libdevel
  Multi-Arch: same
  Depends: libgit2-1.5 (= ${binary:Version}),
           zlib1g-dev,
@@ -36,3 +20,16 @@
           libssh2-1-dev,
           libhttp-parser-dev,
           libpcre2-dev,
+diff --git a/debian/rules b/debian/rules
+index d28ff4865..73d0e457b 100755
+--- a/debian/rules
++++ b/debian/rules
+@@ -19,7 +19,7 @@ COMMON_CMAKE_FLAGS = \
+ 	-DENABLE_REPRODUCIBLE_BUILDS=ON \
+ 	-DREGEX_BACKEND=pcre2 \
+ 	-DUSE_GSSAPI=ON \
+-	-DUSE_HTTPS=mbedTLS \
++	-DUSE_HTTPS=OpenSSL \
+ 	-DUSE_HTTP_PARSER=system \
+ 	-DUSE_NTLMCLIENT=OFF \
+ 	-DUSE_SSH=ON
