@@ -18,7 +18,7 @@
 	url = https://github.com/jiangcuo/pve-installer
 [submodule "packages/pve-container/pve-container"]
 	path = packages/pve-container/pve-container
-	url = https://github.com/jiangcuo/pve-container
+	url = https://git.proxmox.com/git/pve-container.git
 [submodule "packages/proxmox-archive-keyring/proxmox-archive-keyring"]
 	path = packages/proxmox-archive-keyring/proxmox-archive-keyring
 	url = https://git.proxmox.com/git/proxmox-archive-keyring.git
@@ -33,19 +33,19 @@
 	url = https://git.proxmox.com/git/proxmox-mini-journalreader.git
 [submodule "packages/pve-cluster/pve-cluster"]
 	path = packages/pve-cluster/pve-cluster
-	url = https://github.com/jiangcuo/pve-cluster.git
+	url = https://git.proxmox.com/git/pve-cluster.git
 [submodule "packages/proxmox-i18n/proxmox-i18n"]
 	path = packages/proxmox-i18n/proxmox-i18n
 	url = https://git.proxmox.com/git/proxmox-i18n
 [submodule "packages/proxmox-widget-toolkit/proxmox-widget-toolkit"]
 	path = packages/proxmox-widget-toolkit/proxmox-widget-toolkit
-	url = https://github.com/jiangcuo/proxmox-widget-toolkit.git
+	url = https://git.proxmox.com/git/proxmox-widget-toolkit.git
 [submodule "packages/pve-http-server/pve-http-server"]
 	path = packages/pve-http-server/pve-http-server
 	url = https://git.proxmox.com/git/pve-http-server
 [submodule "packages/pve-docs/pve-docs"]
 	path = packages/pve-docs/pve-docs
-	url = https://github.com/jiangcuo/pve-docs
+	url = https://git.proxmox.com/git/pve-docs.git
 [submodule "packages/libgit2/libgit2"]
 	path = packages/libgit2/libgit2
 	url = https://git.proxmox.com/git/libgit2
@@ -57,7 +57,7 @@
 	url = https://git.proxmox.com/git/pve-xtermjs
 [submodule "packages/pve-access-control/pve-access-control"]
 	path = packages/pve-access-control/pve-access-control
-	url = https://github.com/jiangcuo/pve-access-control
+	url = https://git.proxmox.com/git/pve-access-control.git
 [submodule "packages/ifupdown2/ifupdown2"]
 	path = packages/ifupdown2/ifupdown2
 	url = https://git.proxmox.com/git/ifupdown2
@@ -87,7 +87,7 @@
 	url = https://git.proxmox.com/git/lxc
 [submodule "packages/proxmox-kernel-helper/proxmox-kernel-helper"]
 	path = packages/proxmox-kernel-helper/proxmox-kernel-helper
-	url = https://github.com/jiangcuo/proxmox-kernel-helper
+	url = https://git.proxmox.com/git/proxmox-kernel-helper.git
 [submodule "packages/fonts-font-logos/fonts-font-logos"]
 	path = packages/fonts-font-logos/fonts-font-logos
 	url = https://git.proxmox.com/git/fonts-font-logos
