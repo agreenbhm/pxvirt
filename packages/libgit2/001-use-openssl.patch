@@ -1,0 +1,38 @@
+--- a/debian/rules
++++ b/debian/rules
+@@ -12,7 +12,7 @@ COMMON_CMAKE_FLAGS = \
+ 	-DCERT_LOCATION=/etc/ssl/certs/ca-certificates.crt \
+ 	-DDISABLE_ONLINE_TESTS=ON \
+ 	-DENABLE_REPRODUCIBLE_BUILDS=ON \
+ 	-DREGEX_BACKEND=pcre2 \
+ 	-DUSE_GSSAPI=ON \
+-	-DUSE_HTTPS=mbedTLS \
++	-DUSE_HTTPS=OpenSSL \
+ 	-DUSE_HTTP_PARSER=system \
+ 	-DUSE_NTLMCLIENT=OFF \
+ 	-DUSE_SSH=ON
+--- a/debian/control
++++ b/debian/control
+@@ -8,7 +8,7 @@ Build-Depends: debhelper-compat (= 13),
+                python3-minimal:any,
+                pkg-config,
+                ca-certificates,
+                cmake,
+                zlib1g-dev,
+-               libmbedtls-dev,
++               libssl-dev,
+                libssh2-1-dev,
+                libhttp-parser-dev,
+                libpcre2-dev,
+@@ -18,7 +18,7 @@ Rules-Requires-Root: no
+ Package: libgit2-dev
+ Architecture: any
+ Section: libdevel
+ Multi-Arch: same
+ Depends: libgit2-1.5 (= ${binary:Version}),
+          zlib1g-dev,
+-         libmbedtls-dev,
++         libssl-dev,
+          libssh2-1-dev,
+          libhttp-parser-dev,
+          libpcre2-dev,
