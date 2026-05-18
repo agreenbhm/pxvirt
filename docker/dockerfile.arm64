@@ -28,13 +28,18 @@ else  \
         https://us.mirrors.lierfang.com/pxcloud/pxvirt/pveport.gpg; \
 fi
 
-RUN apt update && apt -y install build-* devscripts cargo dh-cargo devscripts rsync debcargo pkg-config debhelper git bison dwarves flex meson equivs liblocale-po-perl xtr
+RUN apt update && apt -y install build-* devscripts cargo dh-cargo devscripts rsync debcargo pkg-config debhelper git bison dwarves flex meson equivs liblocale-po-perl
 
 RUN apt update  \
 && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends  install  proxmox-ve || echo ok
 
 RUN rm /var/lib/dpkg/info/pve-manager.postinst \
  && dpkg --force-confdef --force-confold --configure -a
+
+RUN cargo install xtr
+
+ENV PATH="/root/.cargo/bin:${PATH}"
+
 ADD ./start.sh /
 
 CMD ["bash","/start.sh"]
