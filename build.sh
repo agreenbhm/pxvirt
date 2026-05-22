@@ -2,7 +2,8 @@
 PKGNAME=$1
 SH_PATH=$(readlink -f `dirname "$0"`)
 PKG_LOCATION_PATH="/tmp/2022"
-DEB_OPT="dd"
+#DEB_OPT="dd"
+DEB_OPT="nocheck"
 
 errlog(){
    echo $1;
