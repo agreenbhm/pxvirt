@@ -7,7 +7,8 @@ DEB_OPT="nocheck"
 
 errlog(){
    echo $1;
-   exit 1;
+   echo "Press Ctrl+C to exit or any key to continue"
+   read -rsn1
 }
 
 copy_dir(){
@@ -114,10 +115,19 @@ update_submodues(){
         		break
     		fi
 	done
-	if [ -n "$SKIP_SUBMODULE"  ];then
-		git submodule update --init "$SH_PATH/packages/$PKGNAME/$PKGNAME"
+#	if [ -n "$SKIP_SUBMODULE"  ];then
+#		git submodule update --init "$SH_PATH/packages/$PKGNAME/$PKGNAME"
+#	else
+#		git submodule update --init --recursive "$SH_PATH/packages/$PKGNAME/$PKGNAME"
+#	fi
+	if [ -n "$SKIP_SUBMODULE" ]; then
+	    git submodule update --init "$SH_PATH/packages/$PKGNAME/$PKGNAME"
+	    git -C "$SH_PATH/packages/$PKGNAME/$PKGNAME" checkout $(git -C "$SH_PATH/packages/$PKGNAME/$PKGNAME" symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo main) 2>/dev/null || git -C "$SH_PATH/packages/$PKGNAME/$PKGNAME" checkout master
 	else
-		git submodule update --init --recursive "$SH_PATH/packages/$PKGNAME/$PKGNAME"
+	    git submodule update --init --recursive "$SH_PATH/packages/$PKGNAME/$PKGNAME"
+            git -C "$SH_PATH/packages/$PKGNAME/$PKGNAME" checkout $(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed "s@^refs/remotes/origin/@@" || echo main) 2>/dev/null || git -C "$SH_PATH/packages/$PKGNAME/$PKGNAME" checkout master || git -C "$SH_PATH/packages/$PKGNAME/$PKGNAME" checkout main || git -C "$SH_PATH/packages/$PKGNAME/$PKGNAME" checkout proxmox/trixie || git -C "$SH_PATH/packages/$PKGNAME/$PKGNAME" checkout debian/master || git -C "$SH_PATH/packages/$PKGNAME/$PKGNAME" checkout debian/sid || git -C "$SH_PATH/packages/$PKGNAME/$PKGNAME" checkout debian/unstable || git -C "$SH_PATH/packages/$PKGNAME/$PKGNAME" checkout proxmox/bookworm || git -C "$SH_PATH/packages/$PKGNAME/$PKGNAME" checkout debian-unstable
+	    git -C "$SH_PATH/packages/$PKGNAME/$PKGNAME" submodule foreach --recursive \
+	        'git checkout $(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed "s@^refs/remotes/origin/@@" || echo main) 2>/dev/null || git checkout master || git checkout proxmox/trixie || git checkout debian/master || git checkout debian/sid || git checkout debian/unstable || git checkout proxmox/bookworm || git checkout debian-unstable'
 	fi
 }
 
